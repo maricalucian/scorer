@@ -175,6 +175,7 @@ export const GamePage = (): ReactElement => {
   const [scroll, setScroll] = useState(0);
   const [showFinish, setShowFinish] = useState(false);
   const [winner, setWinner] = useState(0);
+  const [winnerDarts, setWinnerDarts] = useState(0);
   const [stats, setStats] = useState({
     0: { ...emptyStats },
     1: { ...emptyStats },
@@ -229,7 +230,7 @@ export const GamePage = (): ReactElement => {
 
     // if (totalLeft === startScore[0]) {
     //   setWinner(0);
-    //   se`tShowFinish(true);
+    //   setShowFinish(true);
     // }
     // if (totalRight === startScore[1]) {
     //   setWinner(1);
@@ -247,6 +248,7 @@ export const GamePage = (): ReactElement => {
           setEditField(true);
           setEditValue(finishScore);
           setWinner(field[0]);
+          setWinnerDarts(darts - 1);
           setShowFinish(true);
           setCurrentScore({
             ...currentScore,
@@ -597,7 +599,7 @@ export const GamePage = (): ReactElement => {
               : // @ts-ignore
                 minFinish[scores[winner][scores[winner].length - 1]]
           }
-          dartsNumber={0}
+          dartsNumber={winnerDarts || 0}
           winner={winner ? 'Player 2' : 'Player 1'}
           darts={
             field[1] < scores[winner].length
@@ -613,6 +615,7 @@ export const GamePage = (): ReactElement => {
               0
             );
 
+            setWinnerDarts(0);
             setCurrentScore({
               ...currentScore,
               [field[0] as 0 | 1]: startScore[field[0] as 0 | 1] - total,
@@ -622,6 +625,7 @@ export const GamePage = (): ReactElement => {
             setShowFinish(false);
           }}
           onFinish={(option) => {
+            setWinnerDarts(0);
             setScores({
               0: [],
               1: [],
