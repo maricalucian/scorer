@@ -23,6 +23,8 @@ export const Finish = ({
     dartsNumber + 1 >= minDarts ? dartsNumber : minDarts - 1
   );
 
+  console.log(minDarts);
+
   const handleUserKeyPress = useCallback(
     (event: any) => {
       switch (event.key) {

@@ -590,7 +590,13 @@ export const GamePage = (): ReactElement => {
       {showFinish && (
         <Finish
           // @ts-ignore
-          minDarts={minFinish[scores[winner][scores[winner].length - 1]]}
+          minDarts={
+            editField
+              ? // @ts-ignore
+                minFinish[editValue]
+              : // @ts-ignore
+                minFinish[scores[winner][scores[winner].length - 1]]
+          }
           dartsNumber={0}
           winner={winner ? 'Player 2' : 'Player 1'}
           darts={
